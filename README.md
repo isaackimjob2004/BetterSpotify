@@ -39,3 +39,35 @@ For now lets ignore the differences between a local repo vs a remote repo. They 
 **Git Blame** type of feature where next to each song in a playlist, users can see who added it, who approved it, and who likes it
 
 **Git merge** must be done so it is automated and easy for playlist curators. 
+
+### Developer Setup
+
+This project is built in C++ and uses `vcpkg` in Manifest Mode to manage dependencies (`libgit2`, `nlohmann-json`, `cpr`). 
+
+### Prerequisites
+Before building, ensure you have the following installed on your system:
+* A C++17 compatible compiler (Apple Clang, GCC, or MSVC)
+* [CMake](https://cmake.org/) (v3.20+)
+* [Ninja](https://ninja-build.org/) Build System
+* [vcpkg](https://github.com/microsoft/vcpkg)
+
+### Build Instructions
+
+Install Apple Clang compiler if on Mac (xcode-select --install)
+Install Homebrew for system tools
+Prob different if not on mac
+brew install cmake ninja pkg-config
+git clone [https://github.com/microsoft/vcpkg.git](https://github.com/microsoft/vcpkg.git)
+cd vcpkg
+./bootstrap-vcpkg.sh
+
+Cmake and ninja to link packages and files to build executables, vcpkg to automatically download c++ libraries from the internet
+
+This is the build cmd. Triggers vcpkg so any new dependency listed in the json will be automatically downloaded. Run this and compile when you add a new file or dependency
+cmake -B build -S . -G Ninja -DCMAKE_TOOLCHAIN_FILE=[PATH_TO_VCPKG]/scripts/buildsystems/vcpkg.cmake
+
+Compile cmd. Run this when you change code
+cmake --build build
+
+Run executable cmd
+./build/PlaylistApp

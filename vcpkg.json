@@ -1,0 +1,9 @@
+{
+  "name": "playlist-vcs",
+  "version": "0.0.1",
+  "dependencies": [
+    "libgit2",
+    "nlohmann-json",
+    "cpr"
+  ]
+}
