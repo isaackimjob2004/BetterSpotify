@@ -34,7 +34,7 @@ For now lets ignore the differences between a local repo vs a remote repo. They 
 
 **Branching allows parallel development**. A PR asks the owner of the main branch to merge your changes in. This is a suggestion / collaboration feature.
 
-**Diffs** would be a preview changes view. Og creator seens new songs highlighted in green and suggested removals in red. Songs should be sorted in some manner.
+**Diffs** would be a preview changes view. Og creator sees new songs highlighted in green and suggested removals in red. Songs should be sorted in some manner.
 
 **Git Blame** type of feature where next to each song in a playlist, users can see who added it, who approved it, and who likes it
 
