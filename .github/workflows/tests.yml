@@ -1,0 +1,47 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ main, staging ]
+  pull_request:
+    branches: [ main, staging ]
+
+jobs:
+  # Job 1
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    # Clones out repo code onto VM. Temp hosts updated code you're pushing.
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Saves and reuses external libraries across workflow runs.
+    - name: Cache vcpkg and dependencies
+      id: cache-vcpkg
+      uses: actions/cache@v4
+      with:
+        path: ./vcpkg
+        key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+        restore-keys: |
+          ${{ runner.os }}-vcpkg-
+      
+    - name: Setup vcpkg (if not fully cached)
+      if: steps.cache-vcpkg.outputs.cache-hit != 'true'
+      run: |
+        # Only clone if the folder doesn't already exist from a partial cache restore
+        if [ ! -d "vcpkg" ]; then
+          git clone https://github.com/microsoft/vcpkg.git
+        fi
+        ./vcpkg/bootstrap-vcpkg.sh
+
+    - name: Configure CMake
+      run: >
+        cmake -B build -S . -G Ninja
+        -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+    
+    - name: Build 
+      run: cmake --build build
+    
+    - name: Run Tests
+      working-directory: build
+      run: ctest --output-on-failure
