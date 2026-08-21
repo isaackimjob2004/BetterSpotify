@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.25)
 
 # Makes sure timestamps of extracted files are set properly
 if(POLICY CMP0135)
