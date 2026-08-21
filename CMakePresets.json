@@ -1,0 +1,63 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default Debug Config",
+            "description": "Ninja generator with vcpkg manifest mode",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "displayName": "Build All",
+            "configurePreset": "default"
+        },
+        {
+            "name": "app-only",
+            "displayName": "Build PlaylistApp Only",
+            "configurePreset": "default",
+            "targets": [
+                "PlaylistApp"
+            ]
+        },
+        {
+            "name": "test-only",
+            "displayName": "Build unit_tests Only",
+            "configurePreset": "default",
+            "targets": [
+                "unit_tests"
+            ]
+        },
+        {
+            "name": "clean-build",
+            "displayName": "Clean and Rebuild",
+            "configurePreset": "default",
+            "cleanFirst": true
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "default",
+            "displayName": "Run Tests",
+            "configurePreset": "default",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error"
+            }
+        }
+    ]
+}

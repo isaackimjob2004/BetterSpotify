@@ -1,17 +1,18 @@
-Build cmd:
-cmake -B build -S . -G Ninja -DCMAKE_TOOLCHAIN_FILE=[PATH_TO_VCPKG]/scripts/buildsystems/vcpkg.cmake
+Config Build Sys cmd:
+cmake --preset default
 
 Compile cmd:
-cmake --build build
-cmake --build build --target main_app
-cmake --build build --target test_app
+cmake --build --preset default
+cmake --build --preset app-only
+cmake --build --preset test-only
+cmake --build --preset clean-build
 
 Delete compiled files:
 cmake --build build --target clean
 
-Run cmd:
+Run executables cmd:
 ./build/PlaylistApp
+./build/unit_tests
 
 How to run tests: (compile first)
-./build/unit_tests
-ctest --test-dir build --output-on-failure
+ctest --preset default
