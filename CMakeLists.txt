@@ -5,11 +5,12 @@ if(POLICY CMP0135)
   cmake_policy(SET CMP0135 NEW)
 endif()
 
-project(playlist-vcs)
+project(playlist-vcs LANGUAGES CXX C)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Find the official libraries
@@ -20,6 +21,7 @@ find_package(cpr CONFIG REQUIRED)
 # Core library. So probably all backend code in src
 add_library(core_lib src/Track.cpp)
 target_include_directories(core_lib PUBLIC include)
+target_compile_features(core_lib PUBLIC cxx_std_20)
 target_link_libraries(core_lib PUBLIC
     libgit2::libgit2package
     nlohmann_json::nlohmann_json
