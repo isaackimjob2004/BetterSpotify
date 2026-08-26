@@ -26,5 +26,5 @@ public:
     [[nodiscard]] auto operator<=>(const Track&) const = default; 
 
     // Stream operator
-    friend std::ostream& operator<<(std::ostream, const Track& track);
+    friend std::ostream& operator<<(std::ostream&, const Track& track);
 };
