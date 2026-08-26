@@ -1,20 +1,30 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include <iosfwd>
+#include <compare>
 
 class Track {
 private:
-    std::string isrc;
-    std::string title;
-    std::string artist; // Assuming there's only one artist for a track. TODO change to dynamic vector
+    std::string isrc_;
+    std::string title_;
+    std::vector<std::string> artists_;
 
 public:
-    // Constructor and destructor
+    // Constructors
+    Track() noexcept = default;
+    Track(std::string isrc, std::string title, std::vector<std::string> artists);
     Track(std::string isrc, std::string title, std::string artist);
-    ~Track() = default;
 
     // Getters
-    const std::string& get_isrc() const { return isrc; }
-    const std::string& get_title() const { return title; }
-    const std::string& get_artist() const { return artist; }
+    [[nodiscard]] const std::string& isrc() const noexcept { return isrc_; }
+    [[nodiscard]] const std::string& title() const noexcept { return title_; }
+    [[nodiscard]] const std::vector<std::string>& artists() const noexcept { return artists_; }
+
+    // Spaceship operator  
+    [[nodiscard]] auto operator<=>(const Track&) const = default; 
+
+    // Stream operator
+    friend std::ostream& operator<<(std::ostream, const Track& track);
 };
