@@ -13,6 +13,11 @@ private:
 
 public:
     // Constructors
+    // Rules:
+    // - isrc formatted to ISO 3901. 12 chars, uppercase alphanumeric only.
+    // - title and artist accept valid UTF-8 strings. Not, non-printable ASCII, pure whitespace
+    //   and sanitizes leading/trailing whitespace.
+    // - title is 1 - 255 chars, artist is 1 - 255 chars, artists is 1 - 50 items.
     Track() noexcept = default;
     Track(std::string isrc, std::string title, std::vector<std::string> artists);
     Track(std::string isrc, std::string title, std::string artist);
