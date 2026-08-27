@@ -41,7 +41,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-add_executable(unit_tests tests/test_track.cpp)
+add_executable(unit_tests tests/TrackConstructorTest.cpp)
 target_link_libraries(unit_tests PRIVATE core_lib GTest::gtest_main)
 
 include(GoogleTest)
