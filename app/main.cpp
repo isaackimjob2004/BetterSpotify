@@ -7,7 +7,8 @@
 
 using json = nlohmann::json;
 
-// do i need more free fncs in this?
+// TODO implement CLI here!
+
 #define CHECK_GIT(api_call, repo_ptr, step_name) \
     if ((api_call) < 0) { \
         const git_error* e = git_error_last(); \
